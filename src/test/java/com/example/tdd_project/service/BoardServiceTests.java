@@ -29,7 +29,7 @@ public class BoardServiceTests {
 
         BoardDTO dto = BoardDTO.builder().number(1L).content("kimdonggyun").author("onetwo").build();
 
-        boardService.read(dto);
+        boardService.read(2L);
     }
 
     @Test

@@ -3,7 +3,6 @@ package com.example.tdd_project.service;
 import com.example.tdd_project.DTO.BoardDTO;
 import com.example.tdd_project.entity.Board;
 import com.example.tdd_project.repository.BoardRepository;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void save(BoardDTO dto){
         Board board = Board.builder().content(dto.getContent())
-                .author(dto.getAuthor()).number(dto.getNumber()).build();
+                .author(dto.getAuthor()).build();
 
         boardRepository.save(board);
 
@@ -30,12 +29,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void read(BoardDTO dto){
-        Board board = Board.builder().content(dto.getContent())
-                .author(dto.getAuthor()).number(dto.getNumber()).build();
+    public Optional<Board> read(Long number){
 
-        Optional<Board> bno = boardRepository.findById(board.getNumber());
+
+        Optional<Board> bno = boardRepository.findById(number);
         log.info(bno);
+
+        return bno;
     }
 
     @Override
@@ -52,9 +52,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void delete(Long number){
+        Optional<Board> bno = boardRepository.findById(number);
 
-        boardRepository.deleteById(number);
-        log.info("success");
+        if(bno.isPresent()) {
 
+            boardRepository.deleteById(number);
+            log.info("success");
+        }
     }
 }
