@@ -8,6 +8,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +28,19 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.save(board);
 
         log.info(board);
+    }
+
+    @Override
+    public void saveAll(ArrayList<BoardDTO> dtoList){
+        ArrayList<Board> boardList = new ArrayList<>();
+
+        for (int i = 0; i < dtoList.size(); i++) {
+            Board b = Board.builder().content(dtoList.get(i).getContent())
+                    .author(dtoList.get(i).getAuthor()).build();
+            boardList.add(b);
+        }
+
+        boardRepository.saveAll(boardList);
     }
 
     @Override
@@ -60,4 +75,6 @@ public class BoardServiceImpl implements BoardService {
             log.info("success");
         }
     }
+
+
 }

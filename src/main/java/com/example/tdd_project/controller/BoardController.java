@@ -8,6 +8,8 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -40,6 +42,12 @@ public class BoardController {
     public void save(@RequestBody BoardDTO dto)
     {
         boardService.save(dto);
+    }
+
+    @PostMapping(value = "/saveAll") //만약 save할 JSON 파일이 배열 형태로 오게 된다면 , 이 방식으로 저장하도록 설정
+    public void save(@RequestBody List<BoardDTO> dto)
+    {
+        boardService.saveAll((ArrayList<BoardDTO>) dto);
     }
 
     @PostMapping(value = "/modify") //이제 POST 요청에서 JSON 파일을 받아서 저장소에 modify 할 수 있음

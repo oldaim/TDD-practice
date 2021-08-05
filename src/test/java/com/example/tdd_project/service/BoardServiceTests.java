@@ -5,8 +5,12 @@ import com.example.tdd_project.DTO.BoardDTO;
 import com.example.tdd_project.entity.Board;
 import com.example.tdd_project.repository.BoardRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.Timeout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 public class BoardServiceTests {
@@ -48,6 +52,20 @@ public class BoardServiceTests {
         Long number = 3L;
 
         boardService.delete(number);
+    }
+
+    @Test
+    public void 다수_저장() {
+
+
+        ArrayList<BoardDTO> dtoList = new ArrayList<>();
+
+        for(int i = 0; i < 5; i++){
+            BoardDTO dto= BoardDTO.builder().content("test"+ i).author("Sejong"+ i).build();
+            dtoList.add(dto);
+        }
+
+        boardService.saveAll(dtoList);
     }
 
 
