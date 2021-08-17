@@ -11,5 +11,5 @@ import java.util.List;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     @Query("select r from Reply r where r.board.number = :number")
-    public List<Reply> findAllByBoardNumber(@Param("number") Long number);
+    List<Reply> findAllByBoardNumber(@Param("number") Long number);
 }

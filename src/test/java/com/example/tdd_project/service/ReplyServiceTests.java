@@ -31,7 +31,7 @@ public class ReplyServiceTests {
 
           if(dummy_board.isPresent())
           {
-             ReplyDTO replyDTO = ReplyDTO.builder().board(dummy_board.get()).text(i+"...test_reply").build();
+             ReplyDTO replyDTO = ReplyDTO.builder().boardNumber(dummy_board.get().getNumber()).text(i+"...test_reply").build();
 
              replyService.save(replyDTO);
           }
@@ -45,11 +45,23 @@ public class ReplyServiceTests {
     {
         Optional<Board> board_test= boardService.read(85L);
 
-        ReplyDTO replyDTO = ReplyDTO.builder().board(board_test.get()).text("test_reply").build();
+        ReplyDTO replyDTO = ReplyDTO.builder().boardNumber(board_test.get().getNumber()).text("test_reply").build();
 
         replyService.save(replyDTO);
 
     }
+
+
+    @Test
+    public void 댓글_조회()
+    {
+        Long replyNumber = 15L;
+
+        replyService.read(3L);
+
+    }
+
+
 
     @Test
     public void 게시물의_모든_댓글_조회()
@@ -66,6 +78,14 @@ public class ReplyServiceTests {
 
 
         }
+    }
+
+    @Test
+    public void 댓글_단독_삭제()
+    {
+        Long random_number = 85L;
+
+        replyService.delete(random_number);
     }
 
 

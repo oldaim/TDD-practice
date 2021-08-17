@@ -1,8 +1,10 @@
 package com.example.tdd_project.controller;
 
 import com.example.tdd_project.DTO.BoardDTO;
+import com.example.tdd_project.DTO.ReplyDTO;
 import com.example.tdd_project.entity.Board;
 import com.example.tdd_project.service.BoardService;
+import com.example.tdd_project.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
@@ -23,13 +26,13 @@ public class BoardController {
 
     //조회
     @GetMapping(value = "/read/{bno}") // URL에 변수를 사용해서 원하는 글만 조회 하게 했음
-
     public ResponseEntity<Optional<Board>> read(@PathVariable("bno") Long number)
     {
 
         return ResponseEntity.ok(boardService.read(number));
 
     }
+
 
     // 저장
     @PostMapping(value = "/save") //이제 POST 요청에서 JSON 파일을 받아서 저장소에 save 할 수 있음

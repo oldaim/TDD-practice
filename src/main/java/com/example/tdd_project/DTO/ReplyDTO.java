@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class ReplyDTO {
     private Long ReplyNumber;
 
-    private Board board;
+    private Long boardNumber;
 
     private String text;
 }

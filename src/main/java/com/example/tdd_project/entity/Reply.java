@@ -18,6 +18,6 @@ public class Reply extends TimeEntity {
 
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Board board;
 }

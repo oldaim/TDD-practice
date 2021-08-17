@@ -18,6 +18,9 @@ public class BoardServiceTests {
     @Autowired
     BoardService boardService;
 
+    @Autowired
+    ReplyService replyService;
+
     @Test
     public void 더미_데이터_생성(){
 
@@ -46,8 +49,6 @@ public class BoardServiceTests {
     public void 조회(){
 
 
-        BoardDTO dto = BoardDTO.builder().number(1L).content("kimdonggyun").author("onetwo").build();
-
         boardService.read(2L);
     }
 
@@ -61,10 +62,12 @@ public class BoardServiceTests {
     }
 
     @Test
-    public void 삭제(){
+    public void 게시물과_댓글_같이_삭제(){
 
 
-        Long number = 3L;
+        Long number = 85L;
+
+        replyService.deleteAll(number);
 
         boardService.delete(number);
     }
