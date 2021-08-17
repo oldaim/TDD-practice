@@ -19,6 +19,21 @@ public class BoardServiceTests {
     BoardService boardService;
 
     @Test
+    public void 더미_데이터_생성(){
+
+        for(Long i = Long.valueOf(1); i <= 100L; i++)
+        {
+            BoardDTO dto = BoardDTO.builder().number(i).content("Board Dummy file....."+i)
+                    .author("Dummy_author..."+i).build();
+            boardService.save(dto);
+        }
+
+
+
+    }
+
+
+    @Test
     public void 등록(){
 
 
